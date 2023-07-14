@@ -2,7 +2,8 @@ function Promise(executor) {
   // 添加属性
   this.PromiseState = 'pending';
   this.PromiseResult = null;
-
+  // 声明一个属性
+  this.callback = {};
   //保存实例对象的this的值
   let self = this;
 
@@ -17,12 +18,16 @@ function Promise(executor) {
     // console.log(this, self);
     self.PromiseState = 'fulfilled';
     self.PromiseResult = data;
+    //调用成功的回调函数
+    if (self.callback.onResolved) self.callback.onResolved(data);
   }
 
   function reject(data) {
     if (self.PromiseState !== 'pending') return;
     self.PromiseState = 'rejected';
     self.PromiseResult = data;
+    // 执行失败的回调
+    if (self.callback.onRejected) self.callback.onRejected(data);
   }
 
   //抛出错误的时候设置状态为失败
@@ -40,5 +45,12 @@ Promise.prototype.then = function (onResolved, onRejected) {
   }
   if (this.PromiseState === 'rejected') {
     onRejected(this.PromiseResult);
+  }
+  // 保存回调函数
+  if (this.PromiseState === 'pending') {
+    this.callback = {
+      onResolved,
+      onRejected,
+    };
   }
 };
