@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    有且只有一种方法 :  返回一个pending状态的promise对象
+    */
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('OK')
+      }, 1000);
+    })
+
+    p1.then((value) => {
+      console.log(value);
+      return new Promise(() => { })
+
+      /*
+      原因 :  这里返回无状态的promise对象,就意味着p1.then也是一个无状态的
+              状态没有改变,所以不会执行下面的代码
+      */
+
+
+    }).then(() => {
+      console.log(2222);
+    }).then(() => {
+      console.log(333);
+    }).catch((err) => {
+      console.log(err, '错误');
+    })
+  //打印 ok
+  </script>
+</body>
+
+</html>

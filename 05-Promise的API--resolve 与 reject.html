@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // Promsie .resolve 跟 Promsie .reject
+    /*
+    Promsie .resolve
+    如果传入的参数为 非 promsie 对象, 则返回一个新的 promsie 对象, 状态为 resolved
+    如果传入的参数为 promsie 对象, 则参数的结果决定了resolve的结果
+    */
+    // Promise.resolve   快速返回一个成功的promise对象
+    let p1 = Promise.resolve(123)
+    // console.log(p1);  //返回promise对象  状态为成功
+
+    let p2 = Promise.resolve(new Promise((resolve, reject) => {
+      reject(1235)
+      // resolve(123)
+    }))
+    // console.log(p2);  //返回promise对象  状态为失败
+    p2.catch(err => {
+      console.log(err);
+    })
+
+
+
+    // Promise.reject  快速返回一个失败的错误对象
+    /*
+    无论传入的参数 的结果是什么, 都会返回一个失败的promise对象
+    */
+    let p3 = Promise.reject(123)
+    console.log(p3);
+
+    let p4 = Promise.reject(new Promise((resolve, reject) => {
+      resolve('OK')
+    }))
+    console.log(p4);
+
+  </script>
+</body>
+
+</html>

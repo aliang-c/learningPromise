@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    /*
+    promise.all 方法
+    只有当所有执行结果都成功,会返回一个由成功结果组成的对象
+    只要有一个失败,就会返回一个失败的promise对象的结果
+    */
+
+    let p1 = Promise.resolve('OK')
+    let p2 = Promise.resolve('Year')
+    let p3 = Promise.resolve('天气不错')
+
+    let t1 = Promise.all([p1, p2, p3])
+    console.log(t1);    //返回一个数组,数组中的元素为每个promise对象的结果
+
+
+    let p4 = Promise.resolve('I`m OK')
+    let p5 = Promise.reject('I`m not OK')
+    let p6 = Promise.resolve('I`m fine')
+
+    let t2 = Promise.all([p4, p5, p6])
+    console.log(t2);//  I`m not OK
+  </script>
+</body>
+
+</html>

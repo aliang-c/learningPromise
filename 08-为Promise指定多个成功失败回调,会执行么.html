@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let p1 = new Promise((resolve, reject) => {
+      resolve('OK')
+    })
+
+    let d = p1.then((value) => {
+      console.log('第一个回调');
+      return value
+    })
+    p1.then(() => {
+      alert('第二个回调');
+    })
+    p1.then(() => {
+      console.log('第三个回调');
+    })
+
+    p1.catch(() => {
+      console.log('错误回调');
+    })
+    console.log(d);
+    // 三个都会执行
+  </script>
+</body>
+
+</html>

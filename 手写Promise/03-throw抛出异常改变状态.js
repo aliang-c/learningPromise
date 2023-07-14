@@ -7,7 +7,6 @@ function Promise(executor) {
   let self = this;
 
   function resolve(data) {
-    if (self.PromiseState !== 'pending') return;
     // 1.修改对象的属性(promiseState)
     //2.设置对象结构值(promiseResult)
 
@@ -20,7 +19,6 @@ function Promise(executor) {
   }
 
   function reject(data) {
-    if (self.PromiseState !== 'pending') return;
     self.PromiseState = 'rejected';
     self.PromiseResult = data;
   }

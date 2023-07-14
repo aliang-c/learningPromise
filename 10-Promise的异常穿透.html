@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    异常穿透是指  可以只在最后写一个catch  就可以捕获到所有的错误
+    中间不用管
+    */
+
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // resolve('OK')   //ok  222   333
+        reject('no')  //no 错误  只执行最后一个catch
+      }, 1000);
+    })
+
+    p1.then((value) => {
+      console.log(value);
+    }).then(() => {
+      console.log(2222);
+    }).then(() => {
+      console.log(333);
+    }).catch((err) => {
+      console.log(err, '错误');
+    })
+  </script>
+</body>
+
+</html>
