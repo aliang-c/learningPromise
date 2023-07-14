@@ -33,5 +33,12 @@ function Promise(executor) {
     reject(error);
   }
 }
-
-Promise.prototype.then = function (onResolved, onRejected) {};
+// 添加then方法
+Promise.prototype.then = function (onResolved, onRejected) {
+  if (this.PromiseState === 'fulfilled') {
+    onResolved(this.PromiseResult);
+  }
+  if (this.PromiseState === 'rejected') {
+    onRejected(this.PromiseResult);
+  }
+};

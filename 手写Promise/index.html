@@ -12,17 +12,17 @@
   <script>
 
     let p = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('OK')
-      }, 1000);
+      // setTimeout(() => {
+      // reject('err')
+      resolve('OK')
+      // }, 1000);
     })
-    console.log(p);
 
-    // p.then((value) => {
-    //   console.log(value);
-    // }, reason => {
-    //   console.log(reason);
-    // })
+    p.then((value) => {
+      console.log(value, "成功");
+    }, reason => {
+      console.warn(reason);
+    })
   </script>
 </body>
 
